@@ -51,11 +51,11 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
                 canvas.drawBitmap(bmp, mSrcRect, mDstRect, null);
                 getHolder().unlockCanvasAndPost(canvas);
             }
-            try {
+            /*try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
     }
 
