@@ -221,66 +221,6 @@ void release(int index) {
     LOGI("finish release, index %d", index);
 }
 
-int set_param(int index, bool autoExpo, float expoTime, float gain, int brightness) {
-    if (!is_start_stream[index]) {
-        LOGE("set param error, not start_stream, index %d", index);
-        return false;
-    }
-    uint8_t mode;
-    uvc_error_t res = uvc_set_ae_mode(devh[index], autoExpo ? 8 : 1);
-    LOGI("set_param uvc_set_ae_mode, res %d, ae mode expect %d, index %d",
-         res, autoExpo ? 8 : 1, index);
-    res = uvc_get_ae_mode(devh[index], &mode, UVC_GET_CUR);
-    LOGI("set_param uvc_get_ae_mode, res %d, ae mode current %d, index %d", res, mode, index);
-    int ae_abs;
-    res = uvc_set_exposure_abs(devh[index], (int) (10000 * expoTime));
-    LOGI("set_param uvc_set_exposure_abs, res %d, expo time expect %d, index %d", res,
-         (int) (10000 * expoTime), index);
-    res = uvc_get_exposure_abs(devh[index], &ae_abs, UVC_GET_CUR);
-    LOGI("set_param uvc_get_exposure_abs, res %d, expo time current %d, index %d",
-         res, ae_abs, index);
-    uint16_t value;
-    res = uvc_set_gain(devh[index], (int) gain);
-    LOGI("set_param uvc_set_gain, res %d, gain expect %d, index %d", res, (int) gain, index);
-    res = uvc_get_gain(devh[index], &value, UVC_GET_CUR);
-    LOGI("set_param uvc_get_gain, res %d, gain current %d, index %d", res, value, index);
-    int16_t _brightness;
-    res = uvc_set_brightness(devh[index], (int) round((brightness - 50) * 1.28));
-    LOGI("set_param uvc_set_brightness, res %d, brightness expect %d, index %d",
-         res, (int) round((brightness - 50) * 1.28), index);
-    res = uvc_get_brightness(devh[index], &_brightness, UVC_GET_CUR);
-    LOGI("set_param uvc_get_brightness, res %d, brightness current %d, index %d",
-         res, _brightness, index);
-    return res;
-}
-
-int set_heat_coil(int index, bool on) {
-    if (!is_start_stream[index]) {
-        LOGE("set heat coil error, not start_stream, index %d", index);
-        return false;
-    }
-    int16_t value;
-    uvc_error_t res = uvc_set_backlight_compensation(devh[index], on ? 3 : 0);
-    LOGI("set_heat_coil uvc_set_backlight_compensation, res %d, backlight compensation expect %d, index %d",
-         res, on ? 3 : 0, index);
-    res = uvc_get_backlight_compensation(devh[index], &value, UVC_GET_CUR);
-    LOGI("set_heat_coil uvc_get_backlight_compensation, res %d, backlight compensation current %d, index %d",
-         res, value, index);
-    return res;
-}
-
-int get_heat_coil(int index) {
-    if (!is_start_stream[index]) {
-        LOGE("set heat coil error, not start_stream, index %d", index);
-        return false;
-    }
-    int16_t value;
-    uvc_error_t res = uvc_get_backlight_compensation(devh[index], &value, UVC_GET_CUR);
-    LOGI("get_heat_coil uvc_get_backlight_compensation, res %d, backlight compensation current %d, index %d",
-         res, value, index);
-    return value;
-}
-
 void set_stream_mode(int mode) {
     stream_mode = mode;
 }

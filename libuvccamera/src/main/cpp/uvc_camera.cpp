@@ -19,46 +19,10 @@ Java_com_rhythmcoder_libuvccamera_UsbCameraLib_release(
 }
 
 extern "C"
-JNIEXPORT jboolean JNICALL
-Java_com_rhythmcoder_libuvccamera_UsbCameraLib_setPara(
-        JNIEnv *env, jclass type, jint index, jint autoExpo, jfloat expoTime, jfloat gain,
-        jint brightness) {
-    int r = set_param(index, autoExpo == 0, expoTime, gain, brightness);
-    return (r > 0);
-}
-
-extern "C"
-JNIEXPORT jboolean JNICALL
-Java_com_rhythmcoder_libuvccamera_UsbCameraLib_setHeatCoil(
-        JNIEnv *env, jclass type, jint index, jboolean on) {
-
-    int r = set_heat_coil(index, on);
-    return (r > 0);
-}
-
-extern "C"
-JNIEXPORT jboolean JNICALL
-Java_com_rhythmcoder_libuvccamera_UsbCameraLib_getHeatCoil(
-        JNIEnv *env, jclass type, jint index) {
-    int r = get_heat_coil(index);
-    return (r > 0);
-}
-
-extern "C"
 JNIEXPORT void JNICALL
 Java_com_rhythmcoder_libuvccamera_UsbCameraLib_setStreamMode(
         JNIEnv *env, jclass thiz, jint mode) {
     set_stream_mode(mode);
-}
-
-extern "C"
-JNIEXPORT jboolean JNICALL
-Java_com_rhythmcoder_libuvccamera_UsbCameraLib_takePhoto(
-        JNIEnv *env, jclass thiz, jint index, jstring path) {
-    const char *c = env->GetStringUTFChars(path, JNI_FALSE);
-    std::string c_path = std::string(c);
-    env->ReleaseStringUTFChars(path, c);
-    return take_photo(index, c_path);
 }
 
 extern "C"

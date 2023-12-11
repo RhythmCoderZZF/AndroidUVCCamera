@@ -185,10 +185,6 @@ public class USBMonitor {
             return mConnection.getFileDescriptor();
         }
 
-        public synchronized byte[] getRawDescriptors() {
-            return mConnection.getRawDescriptors();
-        }
-
         public int getBusNum() {
             return mBusNum;
         }
