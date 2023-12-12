@@ -11,8 +11,8 @@ set_target_properties(libusb100 PROPERTIES IMPORTED_LOCATION ${libs}/libusb100.s
 add_library(libuvc SHARED IMPORTED)
 set_target_properties(libuvc PROPERTIES IMPORTED_LOCATION ${libs}/libuvc.so)
 
-#add_library(libjpeg-turbo1500 SHARED IMPORTED)
-#set_target_properties(libjpeg-turbo1500 PROPERTIES IMPORTED_LOCATION ${libs}/libjpeg-turbo1500.so)
+add_library(libjpeg-turbo1500 SHARED IMPORTED)
+set_target_properties(libjpeg-turbo1500 PROPERTIES IMPORTED_LOCATION ${libs}/libjpeg-turbo1500.so)
 
 add_library(myuvccamera SHARED uvc_camera.cpp)
 
@@ -28,8 +28,8 @@ target_link_libraries( # Specifies the target library.
         jnigraphics
         libusb100
         libuvc
-        #libjpeg-turbo1500
-        #android
+        libjpeg-turbo1500
+        android
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib})

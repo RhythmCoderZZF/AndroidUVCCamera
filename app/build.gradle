@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.zzf.myuvccameraapplication"
         minSdk 24
-        targetSdk 33
+        targetSdk 27
         versionCode 1
         versionName "1.0"
 
